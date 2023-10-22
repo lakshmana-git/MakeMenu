@@ -1,7 +1,87 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../index.css'
+import { BallTriangle, Oval, ThreeDots } from 'react-loader-spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Signup = () => {
+  const [formData,setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  })
+
+  const [loading,setLoading] = useState(false)
+  const [error,setError] = useState(false)
+  const handleChange = (e)=>{
+          setFormData({
+            ...formData,[e.target.id]:e.target.value
+          })
+  }
+  console.log(formData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        setLoading(true)
+        
+       console.log(formData)
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false)
+      setError(false)
+      if(data.success===false){
+        setError(true)
+        toast.info('User already exist!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+        
+      }else{
+        toast.success('Account Added Successfully 🥳', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+
+      }
+      console.log(data);
+ 
+   
+    } catch (error) {
+      setLoading(false)
+      setError(true)
+      toast.error(`Something went Wrong!`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
+    }
+  };
   
 
 //   const handleLogin = async (e) => {
@@ -54,7 +134,7 @@ const Signup = () => {
         
         <form
           className="flex flex-col space-y-4 bg-white px-4 py-4 sm:px-16 w-full"
-          
+          onSubmit={handleSubmit}
         >
           <div>
             <label htmlFor="name" className="block text-xs text-gray-600 font-bold">
@@ -65,7 +145,8 @@ const Signup = () => {
               placeholder="Username"
               id="username"
               name="username"
-             
+              onChange={handleChange}
+              required
               className='bg-gray-200 text-gray-700  border border-gray-300 rounded py-2 px-4 block w-full appearance-none mx-auto'
             />
           </div>
@@ -78,7 +159,8 @@ const Signup = () => {
               placeholder="example@email.com"
               id="email"
               name="email"
-             
+              onChange={handleChange}
+              required
               className='bg-gray-200 text-gray-700  border border-gray-300 rounded py-2 px-4 block w-full appearance-none mx-auto'
             />
           </div>
@@ -91,12 +173,24 @@ const Signup = () => {
               placeholder="Password"
               id="password"
               name="password"
-             
+              onChange={handleChange}
+              required
               className='bg-gray-200 text-gray-700  border border-gray-300 rounded py-2 px-4 block w-full appearance-none mx-auto'
             />
           </div>
-          <button className='bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-800'>
-        Sign Up
+          <button disabled={loading} className='bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-800 flex justify-center disabled:opacity-80'>
+          {loading ?<div><ThreeDots
+height="25 " 
+width="25" 
+radius="9"
+color="white" 
+ariaLabel="three-dots-loading"
+wrapperStyle={{}}
+wrapperClassName=""
+visible={true}
+
+ /></div>: 'Sign Up'}
+          
           </button>
           <p className="text-center text-sm text-gray-600">
           Already registered?{' '}
@@ -105,6 +199,18 @@ const Signup = () => {
          
           </p>
         </form>
+        <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
       </div>
     </div>
   );
