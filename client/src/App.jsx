@@ -3,6 +3,9 @@ import { Login } from "./Pages/Login"
 import Signup from "./Pages/SignUp"
 import Wrapper from "./Pages/Wrapper"
 import { Home } from "./Pages/Home"
+import Example from "./Components/Dashboard"
+import PrivateRoute from "./Components/PrivateRoute"
+
 
 function App() {
   
@@ -24,6 +27,9 @@ function App() {
                      
                     }
                   />
+                  <Route element={<PrivateRoute/>}>
+                             <Route path="/dashboard" element={<Example/>}/>
+                  </Route>
                 </Routes>
          </BrowserRouter>
     </>

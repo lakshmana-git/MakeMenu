@@ -3,6 +3,8 @@ import mongoose from "mongoose"
 import dotenv from 'dotenv'
 import userRoute from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
+import cookieParser from 'cookie-parser'
+
 
 dotenv.config()
 
@@ -10,6 +12,8 @@ const app = express()
 
 app.use(express.json())
 
+
+app.use(cookieParser())
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log("DB connected...")
@@ -20,7 +24,7 @@ mongoose.connect(process.env.DB_URL).then(()=>{
 
 
 //api Routes
-app.use('/api',userRoute)
+app.use('/api/user',userRoute)
 app.use('/api/auth',authRouter)
 
 
