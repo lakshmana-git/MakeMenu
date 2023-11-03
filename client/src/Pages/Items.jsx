@@ -23,35 +23,38 @@ const [editCategory, setEditCategory] = useState("");
 
   const fetchCategories = async () => {
     try {
-     
-      const response = await fetch('/api/item/allcategories'); 
+      const response = await fetch("/api/item/allcategories", {
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setAllCategories(data.categories);
-       
-
       }
     } catch (error) {
-    
       console.error("Error fetching categories:", error);
     }
   };
-
+  
   const fetchItems = async () => {
     try {
-      const response = await fetch(`/api/item/${currentUser._id}`); 
+      const response = await fetch(`/api/item/${currentUser._id}`, {
+        headers: {
+          'Content-Type': 'application/json', 
+        
+        },
+      });
       if (response.ok) {
         const data = await response.json();
-        
         setItems(data.items);
-        
+        console.log(items);
       }
-      console.log(items)
     } catch (error) {
-      console.error('Error fetching items:', error);
+      console.error("Error fetching items:", error);
     }
   };
-
+  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
