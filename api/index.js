@@ -22,10 +22,7 @@ app.get('*',(req,res)=>{
     res.sendFile(path.join(__dirname,'client','dist','index.html'))
 })
 
-app.use(express.json())
 
-
-app.use(cookieParser())
 
 mongoose.connect(process.env.DB_URL).then(()=>{
     console.log("DB connected...")
@@ -33,7 +30,10 @@ mongoose.connect(process.env.DB_URL).then(()=>{
     console.log(error) 
 })
 
+app.use(express.json())
 
+
+app.use(cookieParser())
 
 //api Routes
 app.use('/api/user',userRoute)
@@ -42,10 +42,6 @@ app.use('/api/item',CateRouter)
 
 
 
-
-app.listen(3000,()=>{
-    console.log("Server running on port 3000....")
-})
 
 
 
@@ -59,4 +55,10 @@ app.use((err,req,res,next)=>{
         error:message,
         statusCode
     })
+})
+
+
+
+app.listen(3000,()=>{
+    console.log("Server running on port 3000....")
 })
