@@ -8,7 +8,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{
-        target:"http://make-menu.onrender.com/",
+        target:"https://make-menu.onrender.com/",
         secure:false,
       },
     },
