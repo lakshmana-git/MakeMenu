@@ -19,14 +19,11 @@ const app = express()
 
 app.use(express.static(path.join(__dirname,'client')))
 
-app.get(/^\/(?!api).*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'index.html'));
-  });
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.use('*.jsx', (req, res) => {
-    res.type('application/javascript');
-    res.sendFile(path.join(__dirname, req.originalUrl));
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 app.use(express.json())
 
