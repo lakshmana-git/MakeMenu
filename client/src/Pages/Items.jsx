@@ -24,7 +24,7 @@ const [editCategory, setEditCategory] = useState("");
   const fetchCategories = async () => {
     try {
      
-      const response = await fetch('/api/item/allcategories'); 
+      const response = await fetch('https://make-menu.onrender.com/api/item/allcategories'); 
       if (response.ok) {
         const data = await response.json();
         setAllCategories(data.categories);
@@ -39,7 +39,7 @@ const [editCategory, setEditCategory] = useState("");
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`/api/item/${currentUser._id}`); 
+      const response = await fetch(`https://make-menu.onrender.com/api/item/${currentUser._id}`); 
       if (response.ok) {
         const data = await response.json();
         
