@@ -23,6 +23,11 @@ app.get(/^\/(?!api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'index.html'));
   });
 
+  app.use('*.jsx', (req, res) => {
+    res.type('application/javascript');
+    res.sendFile(path.join(__dirname, req.originalUrl));
+  });
+
 app.use(express.json())
 
 
