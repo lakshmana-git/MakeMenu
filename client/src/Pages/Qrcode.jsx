@@ -7,7 +7,7 @@ export const Qrcode = () => {
   console.log(currentUser.username)
   useEffect(() => {
  
-    const url = `http://localhost:5173/display/${currentUser._id}/${currentUser.username}/${theme}`; 
+    const url = `https://make-menu.onrender.com/display/${currentUser._id}/${currentUser.username}/${theme}`; 
     setWebpageURL(url);
   }, []);
 

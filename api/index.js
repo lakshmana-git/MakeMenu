@@ -14,14 +14,19 @@ dotenv.config()
 
 
 const __dirname = path.resolve()
+
 const app = express()
 
-app.use(express.static(path.join(__dirname,'/client/dist')))
+app.use(express.static(path.join(__dirname,'client')))
 
-app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'client','dist','index.html'))
-})
+app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
+  });
 
+app.use(express.json())
+
+
+app.use(cookieParser())
 
 
 mongoose.connect(process.env.DB_URL).then(()=>{
@@ -30,10 +35,15 @@ mongoose.connect(process.env.DB_URL).then(()=>{
     console.log(error) 
 })
 
-app.use(express.json())
 
 
-app.use(cookieParser())
+
+
+app.listen(3000,()=>{
+    console.log("Server running on port 3000....")
+})
+
+
 
 //api Routes
 app.use('/api/user',userRoute)
@@ -59,6 +69,3 @@ app.use((err,req,res,next)=>{
 
 
 
-app.listen(3000,()=>{
-    console.log("Server running on port 3000....")
-})
