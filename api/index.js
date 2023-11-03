@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import userRoute from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
 import CateRouter from './routes/item.route.js'
-
+import path from 'path'
 import cookieParser from 'cookie-parser'
 
 
@@ -12,7 +12,15 @@ import cookieParser from 'cookie-parser'
 
 dotenv.config()
 
+
+const __dirname = path.resolve()
 const app = express()
+
+app.use(express.static(path.join(__dirname,'/client/dist')))
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'))
+})
 
 app.use(express.json())
 
