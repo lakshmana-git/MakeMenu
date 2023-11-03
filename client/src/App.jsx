@@ -5,6 +5,7 @@ import Wrapper from "./Pages/Wrapper"
 import { Home } from "./Pages/Home"
 import Example from "./Components/Dashboard"
 import PrivateRoute from "./Components/PrivateRoute"
+import Display from "./Pages/Display"
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
                   <Route element={<PrivateRoute/>}>
                              <Route path="/dashboard" element={<Example/>}/>
                   </Route>
+                  <Route path='/display/:userId/:name/:theme' element={<Display />} />
+
                 </Routes>
          </BrowserRouter>
     </>

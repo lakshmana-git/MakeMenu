@@ -49,7 +49,7 @@ const {loading,error} = useSelector((state)=>state.user)
                 theme: "light",
                 });
              }
-             console.log(data.rest)
+             
              dispatch(signInSuccess(data.rest))
              navigate('/dashboard');
              

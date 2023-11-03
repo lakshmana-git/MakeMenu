@@ -4,6 +4,8 @@ const initialState = {
     currentUser:null,
     loading:false,
     error:false,
+    theme:null,
+    delete:false,
 };
 
 const  userSlice = createSlice({
@@ -53,6 +55,12 @@ const  userSlice = createSlice({
             state.loading = false;
             state.error = false;
           },
+          setTheme:(state,action)=>{
+            state.theme = action.payload
+          },
+          setDelete:(state)=>{
+            state.delete = true
+          }
     }
 })
 
@@ -67,6 +75,8 @@ export const {
     deleteUserStart,
     deleteUserSuccess,
     signOut,
+    setTheme,
+    setDelete
   } = userSlice.actions;
 
 export default userSlice.reducer

@@ -16,6 +16,7 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signOut,
+   
 } from '../redux/user/userSlice';
 
 export default function Profile() {
@@ -25,6 +26,7 @@ export default function Profile() {
   const [imagePercent, setImagePercent] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
+  const [del ,setDel]  = useState(false)
  
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -177,11 +179,31 @@ export default function Profile() {
       </form>
       <div className='flex justify-between mt-5'>
         <span
-          onClick={handleDeleteAccount}
+          onClick={()=>setDel(true)}
           className='text-red-700 cursor-pointer'
         >
           Delete Account
         </span>
+        {del ? (
+          <div className="card w-96 bg-white border border-gray-300 rounded shadow-lg mx-auto p-5 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col">
+            <div className="card-header text-center bg-red-100  p-3 rounded-md flex justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-red-600">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+</svg>
+
+            </div>
+            <div className="card-content mt-5 text-center">
+            <p className="text-sm text-gray-500 mb-2">
+                          Are you sure you want to deactivate your account? All of your data will be permanently
+                          removed. This action cannot be undone.
+                        </p>
+            </div>
+            <button className='bg-red-600 text-white  hover:bg-red-500 p-2 mb-2 rounded-sm' onClick={handleDeleteAccount}>Delete</button>
+            <button className='p-2 rounded-sm border  border-gray-300' onClick={()=>setDel(false)}>Cancel</button>
+          </div>
+        ) : (
+          ""
+        )}
         <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
           Sign out
         </span>

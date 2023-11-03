@@ -16,6 +16,7 @@
     "firebase": "^10.5.0",
     "framer-motion": "^10.16.4",
     "jsonwebtoken": "^9.0.2",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.4.5",

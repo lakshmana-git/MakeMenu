@@ -3,7 +3,11 @@ import mongoose from "mongoose"
 import dotenv from 'dotenv'
 import userRoute from './routes/user.route.js'
 import authRouter from './routes/auth.route.js'
+import CateRouter from './routes/item.route.js'
+
 import cookieParser from 'cookie-parser'
+
+
 
 
 dotenv.config()
@@ -26,6 +30,8 @@ mongoose.connect(process.env.DB_URL).then(()=>{
 //api Routes
 app.use('/api/user',userRoute)
 app.use('/api/auth',authRouter)
+app.use('/api/item',CateRouter)
+
 
 
 

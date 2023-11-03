@@ -4,6 +4,14 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import Profile from '../Pages/Profile';
 import {useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../redux/user/userSlice';
+import Items from '../Pages/Items';
+
+import Theme from '../Pages/Theme';
+import { Qrcode } from '../Pages/Qrcode';
+import Preview from '../Pages/Preview';
+
+
+import { setDelete } from '../redux/user/userSlice';
 
 const userNavigation = [
  
@@ -15,52 +23,32 @@ function classNames(...classes) {
 }
 
 const DashboardContent = () => (
-  <div>
-    <h2>Dashboard Page</h2>
-    {/* Add your Dashboard content here */}
+  <div className='flex justify-center items-center h-[75vh]'>
+    <div className='bg-blue-100 w-[80%] p-4 h-[30%] rounded-lg flex justify-center items-center'>
+           <h1 className='text-3xl font-bold'>Welcome to <span className='inline-block bg-blue-800 bg-clip-text text-4xl text-transparent'>Make Menu</span></h1>
+           
+    </div>
+
+
+      
   </div>
 );
 
-const ItemContent = () => (
-  <div>
-    <h2>Items Page</h2>
-    {/* Add your Items content here */}
-  </div>
-);
-
-const ThemeContent = () => (
-  <div>
-    <h2>Theme Page</h2>
-    {/* Add your Theme content here */}
-  </div>
-);
-
-const QRcodeContent = () => (
-  <div>
-    <h2>QR Code Page</h2>
-    {/* Add your QR Code content here */}
-  </div>
-);
-
-const ProfileContent = () => (
-  <div>
-    <h2>Your Profile Page</h2>
-    {/* Add your profile content here */}
-  </div>
-);
 
 export default function Example() {
     const dispatch = useDispatch()
-    const { currentUser, loading, error } = useSelector((state) => state.user);
+    const { currentUser, loading, error} = useSelector((state) => state.user);
     const user = {
        
         imageUrl :currentUser.profilePicture
       };
+    dispatch(setDelete(false))
 
   const [navigation, setNavigation] = useState([
     { name: 'Dashboard', href: '#', current: true },
     { name: 'Items', href: '#', current: false },
     { name: 'Theme', href: '#', current: false },
+    { name: 'Preview', href: '#', current: false },
     { name: 'QRcode', href: '#', current: false },
     { name: 'Profile', href: '#', current: false },
   ]);
@@ -80,9 +68,10 @@ export default function Example() {
 
   const contentMap = {
     Dashboard: <DashboardContent />,
-    Items: <ItemContent />,
-    Theme: <ThemeContent />,
-    QRcode: <QRcodeContent />,
+    Items: <Items />,
+    Theme: <Theme />,
+    Preview:<Preview/>,
+    QRcode: <Qrcode/>,
     Profile: <Profile/>,
   };
   const handleSignOut = async () => {
@@ -236,6 +225,7 @@ export default function Example() {
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
                       <Disclosure.Button
+                      onClick={handleSignOut}
                         key={item.name}
                         as="a"
                         href={item.href}
