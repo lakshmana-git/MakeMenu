@@ -44,7 +44,6 @@ const handleFaqClick = (index) => {
     }
   };
     
-
   
   const groupedItems = items.reduce((result, item) => {
     const { category, ...rest } = item;
@@ -55,7 +54,7 @@ const handleFaqClick = (index) => {
     result[categoryName].push(rest);
     return result;
   }, {});
- 
+
  
   return (<>
     {
@@ -115,7 +114,7 @@ const handleFaqClick = (index) => {
     
     {
       theme !== "undefined" && theme === 'theme3' && ( <div>
-        <div className='md:hidden lg:hidden flex flex-col justify-center items-center  bg-gray-200 min-h-screen custom-gradient-background'>
+        <div className='md:hidden lg:hidden flex flex-col justify-center items-center  bg-white min-h-screen'>
         
         <div className=" bg-orange-400 text-white text-center w-[80%] mx-auto p-2 rounded-md mt-4">
        
@@ -125,7 +124,7 @@ const handleFaqClick = (index) => {
      </div>
       
       
-      <div className="pt-10 px-3 pb-20">
+      <div className="pt-10 px-3 pb-20 custom-gradient-background">
    
   
    <div className="my-10 max-w-2xl mx-auto space-y-4 lg:space-y-6">

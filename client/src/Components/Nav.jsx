@@ -5,33 +5,7 @@ function Header() {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [sectionClick, setSectionClick] = useState(false);
 
-  const handleMobileLinkClick = (link = "") => {
-    setToggleMenu(false);
-    if (link === "features" || link === "pricing") {
-      handleSectionClick();
-    }
-  };
 
-  const handleSectionClick = () => {
-    setSectionClick((prev) => !prev);
-  };
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    let myElement = "";
-    switch (hash) {
-      case "#features":
-        myElement = document.getElementById("features");
-        myElement?.scrollIntoView?.({ behavior: "smooth" });
-        break;
-      case "#pricing":
-        myElement = document.getElementById("pricing");
-        myElement?.scrollIntoView?.({ behavior: "smooth" });
-        break;
-      default:
-        break;
-    }
-  }, [sectionClick]);
 
   return (
     <div className="w-full py-6 px-4 md:px-16 lg:px-20">
@@ -44,13 +18,15 @@ function Header() {
           <div className="hidden md:block self-center">
             <ul className="flex space-x-8 items-end text-700">
               <li  className="font-semibold">
-                <a href="#features" onClick={handleSectionClick}>
+                <Link to="/login">
                   Features
-                </a>
+                </Link>
               </li>
               
               <li className="font-semibold">
-                <a href="/templates">Templates</a>
+              <Link to="/login" >
+                  Templates
+                </Link>
               </li>
             </ul>
           </div>
@@ -82,25 +58,25 @@ function Header() {
           <div className="relative w-full px-8 py-12 bg-white space-y-8">
             <ul className="space-y-4 flex flex-col">
               <li className="font-semibold" >
-                <a href="#features" onClick={() => handleMobileLinkClick("features")}>
+              <Link to="/login" >
                   Features
-                </a>
+                </Link>
               </li>
               
               <li className="font-semibold">
-                <a href="/templates" onClick={() => handleMobileLinkClick()}>
-                  Templates
-                </a>
+              <Link to="/login">
+                Templates
+                </Link>
               </li>
             </ul>
             <ul className="flex space-x-4 font-semibold">
               <li>
-                <Link to="/login" className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => handleMobileLinkClick()}>
+                <Link to="/login" className="bg-gray-200 px-4 py-2 rounded-md">
                   Login
                 </Link>
               </li>
               <li>
-                <Link to="/signup" className="bg-blue-800 text-white px-4 py-2 rounded-md" onClick={() => handleMobileLinkClick()}>
+                <Link to="/signup" className="bg-blue-800 text-white px-4 py-2 rounded-md">
                   Signup
                 </Link>
               </li>

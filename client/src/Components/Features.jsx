@@ -5,7 +5,7 @@ const Features = () => {
     <div className='w-[100vw] flex flex-col justify-center items-center text-center'>
         
         <FadeIn delay={0.2} direction="down" padding fullWidth>
-        <h1 className='font-bold text-[6vw] md:text-[4vw] mt-5 lg:text-[4vw] xl:text-[2vw]'>Service</h1>
+        <h1 className='font-bold text-[6vw] md:text-[4vw] mt-5 lg:text-[4vw] xl:text-[2vw]'>How</h1>
         </FadeIn>
         <FadeIn delay={0.3} direction="left" padding fullWidth>
                   
